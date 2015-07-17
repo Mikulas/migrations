@@ -24,13 +24,13 @@ class ResetCommand extends BaseCommand
 		$this->setName('migrations:reset');
 		$this->setDescription('Drops current database and recreates it from scratch');
 		$this->setHelp("Drops current database and runs all migrations");
-		$this->addOption('production', NULL, InputOption::VALUE_NONE, 'Will not import dummy data');
+		$this->addOption('dummy', NULL, InputOption::VALUE_NONE, 'Will import dummy data');
 	}
 
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$withDummy = !$input->getOption('production');
+		$withDummy = $input->getOption('dummy');
 		$this->runMigrations(Runner::MODE_RESET, $withDummy);
 	}
 
