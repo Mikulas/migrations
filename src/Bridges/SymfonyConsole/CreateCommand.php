@@ -24,7 +24,7 @@ class CreateCommand extends BaseCommand
 	{
 		$this->setName('migrations:create');
 		$this->setDescription('Creates new migration file with proper name (e.g. 2015-03-14-130836-label.sql)');
-		$this->addArgument('type', InputArgument::REQUIRED, 's(tructures), b(asic-data) or d(ummy-data');
+		$this->addArgument('type', InputArgument::REQUIRED, '<info>s</info>tructures, <info>b</info>asic-data or <info>d</info>ummy-data');
 		$this->addArgument('label', InputArgument::REQUIRED, 'short description');
 	}
 
