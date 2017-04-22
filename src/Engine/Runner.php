@@ -118,6 +118,14 @@ class Runner
 			$this->driver->createTable();
 			$migrations = $this->driver->getAllMigrations();
 			$files = $this->finder->find($this->groups, array_keys($this->extensionsHandlers));
+
+$planFile = '/tmp/plan.tsv';
+			$resolvedOrder = $this->orderResolver->resolve([], $this->groups, $files, self::MODE_RESET);
+			$planPersister = new ExecutionPlanPersister($planFile);
+			$plan = $planPersister->readPlan();
+			$validator = new ExecutionPlanValidator();
+			$validator->validate($plan, $resolvedOrder);
+
 			$toExecute = $this->orderResolver->resolve($migrations, $this->groups, $files, $mode);
 			$this->printer->printToExecute($toExecute);
 
